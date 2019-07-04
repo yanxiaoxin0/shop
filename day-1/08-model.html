@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <script src="/lib/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='msg' :style="style">
+        <br>
+        <h2 :style="{color:color}" >{{hobby}}</h2>
+        <input type="checkbox" value="唱" id="" v-model='hobby'>唱
+        <input type="checkbox" value="跳" v-model='hobby'>跳
+        <input type="checkbox" value="RAP" id="" v-model='hobby'>RAP
+        <input type="checkbox" value="篮球" id="" v-model='hobby'>篮球
+        <br>
+        <input type="radio" value="red" v-model='color'>
+        <input type="radio" value="blue" v-model='color'>
+        <input type="radio" value="yellow" v-model='color'>
+        <input type="radio" value="green" v-model='color'>
+        <input type="range" name="" id="" max="255" min="0" @input='range' v-model='change'>
+        <input type="range" name="" id="" max="255" min="0" @input='range' v-model='change1'>
+        <input type="range" name="" id="" max="255" min="0" @input='range' v-model='change2'>
+        <!-- <h3 :class="{'red':checkbox}">{{gender}}</h3> -->
+        <h3 :style="{color:color}">{{gender}}</h3>
+        <input type="radio" value="女" v-model='gender'>
+        <input type="radio" value="男" v-model='gender'>
+        <br>
+        <!-- <input type="color" name="" id="" v-model='color'> -->
+        <br>
+        <select name="" id="" v-model='msg'>
+            <option value="000">000</option>
+            <option value="111">111</option>
+            <option value="222">222</option>
+        </select>
+        <br>
+        <textarea name="" id="" cols="30" rows="10" v-model='hobby'></textarea>
+    </div>
+    <script>
+        var vn = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world!!! hello world!!!',
+                gender: '男',
+                hobby: ['唱', '跳'],
+                style: 'width:100%',
+                color: 'red',
+                change: 0,
+                change1: 0,
+                change2: 0
+            },
+            methods: {
+                range() {
+                    this.color = `rgb(${this.change},${this.change1},${this.change2})`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
