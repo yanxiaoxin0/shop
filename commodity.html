@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <script src="/lib/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">添加商品</div>
+            <div class="panel-body ">
+                <form class="form-inline">
+                    <label for="">Id:
+                        <input type="text" v-model='id'>
+                    </label>
+                    <label for="">Name:
+                        <input type="text" v-model='name'>
+                    </label>
+                    <input type="button" value="添加" class="btn btn-primary" @click='add'>
+                    <input type="text" v-model='ss'>
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>CTIME</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for='it in msg' :key='it.id' v-if='it.name.includes(ss)  &&it.isdel ==0'>
+                    <!-- <tr v-for='it in msg' :key='it.id' v-if='it.name.indexOf(ss) !==-1 &&it.isdel ==0'> -->
+                    <td>{{it.id}}</td>
+                    <td>{{it.name}}</td>
+                    <td>{{it.ctime|settime}}</td>
+                    <td>
+                        <a href="#" @click='it.isdel =1'>删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                id: '',
+                name: '',
+                ss: '',
+                msg: [
+                    { id: 1, name: '宝马', ctime: new Date(), isdel: 0 },
+                    { id: 2, name: '奔驰', ctime: new Date(), isdel: 0 }
+                ]
+            },
+            methods: {
+                add() {
+                    this.msg.push({ id: this.id, name: this.name, ctime: new Date, isdel: 0 })
+                    this.id = this.name = ''
+                }
+            },
+            filters: {
+                settime(time) {
+                    var dt = new Date()
+                    var y = dt.getFullYear()
+                    var m = dt.getMonth() + 1
+                    var d = dt.getDate()
+                    var h = dt.getHours()
+                    var mm = dt.getMinutes()
+                    var s = dt.getSeconds()
+                    var x = dt.toLocaleString()
+                    return `${y}-${m}-${d} ${h}:${mm}:${s}`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
